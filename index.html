@@ -16,20 +16,27 @@
   <div id="navbar-container"></div>
 
   <script defer>
-    document.addEventListener("DOMContentLoaded", function () {
+   document.addEventListener("DOMContentLoaded", function () {
       fetch("navbar.html")
         .then((response) => response.text())
         .then((html) => {
           document.getElementById("navbar-container").innerHTML = html;
 
-          // Ensure Webflow reinitializes the navbar
-          if (window.Webflow) {
-            window.Webflow.destroy(); // Remove previous instances
-            window.Webflow.ready(); // Reinitialize Webflow scripts
-          }
+          // Wait for the navbar to be added to the DOM
+          setTimeout(() => {
+            const navButton = document.querySelector(".w-nav-button");
+            const navMenu = document.querySelector(".w-nav-menu");
+
+            if (navButton && navMenu) {
+              navButton.addEventListener("click", function () {
+                navMenu.classList.toggle("w--open");
+              });
+            }
+          }, 100); // Small delay to ensure navbar is in the DOM
         })
         .catch((error) => console.error("Error loading the navbar:", error));
     });
+
   </script>
   
   <section class="section">
