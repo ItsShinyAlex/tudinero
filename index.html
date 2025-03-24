@@ -22,16 +22,28 @@
         .then((html) => {
           document.getElementById("navbar-container").innerHTML = html;
   
-          // Wait for Webflow to load, then reinitialize interactions
+          // Wait for navbar to load
           setTimeout(() => {
+            // Reinitialize Webflow interactions
             if (window.Webflow) {
               window.Webflow.require("ix2").init();
             }
-          }, 100); // Small delay to ensure everything is loaded
+  
+            // Manually trigger the navbar's behavior
+            const navButtons = document.querySelectorAll(".w-nav-button");
+            navButtons.forEach((btn) => {
+              btn.addEventListener("click", function () {
+                const menu = this.closest(".w-nav").querySelector(".w-nav-menu");
+                menu.classList.toggle("w--open");
+              });
+            });
+  
+          }, 200); // Slight delay to ensure everything loads properly
         })
         .catch((error) => console.error("Error loading the navbar:", error));
     });
   </script>
+  
   
   
   <section class="section">
