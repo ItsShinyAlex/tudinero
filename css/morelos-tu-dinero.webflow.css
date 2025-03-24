@@ -1529,10 +1529,9 @@ h1 {
   font-display: swap;
 }
 
-iframe {
-  pointer-events: none;
-}
-
-.logoBar {
-  display: none;
+/* Mobile-specific height adjustment */
+@media (max-width: 768px) {
+  iframe {
+    height: 300px; /* Change this value to whatever you need for mobile */
+  }
 }
