@@ -16,16 +16,20 @@
   <div id="navbar-container"></div>
 
   <script defer>
-    
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("navbar.html") // Asegúrate de que "navbar.html" esté en un servidor, no en `file://`
+      fetch("navbar.html")
         .then((response) => response.text())
         .then((html) => {
           document.getElementById("navbar-container").innerHTML = html;
+
+          // Ensure Webflow reinitializes the navbar
+          if (window.Webflow) {
+            window.Webflow.destroy(); // Remove previous instances
+            window.Webflow.ready(); // Reinitialize Webflow scripts
+          }
         })
         .catch((error) => console.error("Error loading the navbar:", error));
     });
-
   </script>
   
   <section class="section">
