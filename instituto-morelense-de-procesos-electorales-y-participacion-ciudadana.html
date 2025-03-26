@@ -25,25 +25,28 @@
         .then((html) => {
           document.getElementById("navbar-container").innerHTML = html;
   
-          // Wait for navbar to load, then reinitialize Webflow interactions
           setTimeout(() => {
+            // Try forcing Webflow to recognize the navbar
             if (window.Webflow) {
-              window.Webflow.require("ix2").init(); // This forces Webflow to reinitialize its interactions
-  
-              // Manually initialize Webflow's nav button behavior if necessary
-              const navButton = document.querySelector(".w-nav-button");
-              if (navButton) {
-                navButton.addEventListener("click", function () {
-                  const navMenu = this.closest(".w-nav").querySelector(".w-nav-menu");
-                  navMenu.classList.toggle("w--open");  // Toggle menu visibility
-                });
-              }
+              window.Webflow.require("ix2").init();
             }
-          }, 200); // Adding a small delay to allow the DOM to settle
+  
+            // Manually add click event for mobile menu
+            const navButton = document.querySelector(".w-nav-button");
+            if (navButton) {
+              navButton.addEventListener("click", function () {
+                const navMenu = document.querySelector(".w-nav-menu");
+                if (navMenu) {
+                  navMenu.classList.toggle("w--open"); // Toggle the dropdown
+                }
+              });
+            }
+          }, 300); // Small delay to ensure the navbar is in the DOM
         })
         .catch((error) => console.error("Error loading the navbar:", error));
     });
   </script>
+  
 
   <section class="section">
     <div class="hero">
