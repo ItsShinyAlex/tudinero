@@ -13,37 +13,23 @@
   <link href="images/webclip.jpeg" rel="apple-touch-icon">
 </head>
 <body>
-  <div id="navbar-container"></div>
 
-  <script defer>
-    document.addEventListener("DOMContentLoaded", function () {
-      fetch("navbar.html")
-        .then((response) => response.text())
-        .then((html) => {
-          document.getElementById("navbar-container").innerHTML = html;
-  
-          // Wait for navbar to load, then reinitialize Webflow interactions
-          setTimeout(() => {
-            if (window.Webflow) {
-              window.Webflow.require("ix2").init(); // This forces Webflow to reinitialize its interactions
-  
-              // Manually initialize Webflow's nav button behavior if necessary
-              const navButton = document.querySelector(".w-nav-button");
-              if (navButton) {
-                navButton.addEventListener("click", function () {
-                  const navMenu = this.closest(".w-nav").querySelector(".w-nav-menu");
-                  navMenu.classList.toggle("w--open");  // Toggle menu visibility
-                });
-              }
-            }
-          }, 200); // Adding a small delay to allow the DOM to settle
-        })
-        .catch((error) => console.error("Error loading the navbar:", error));
-    });
-  </script>
-  
-  
-  
+  <!-- navbar.html -->
+  <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+    <div class="navbar-container">
+      <a href="index.html" aria-current="page" class="navbar-link w-nav-brand w--current">
+        <img src="images/brand_image.svg" loading="lazy" alt="" class="navbar-img">
+      </a>
+      <nav role="navigation" class="nav-menu w-nav-menu">
+        <a href="index.html#taxes_nav" class="nav-link w-nav-link">¿A dónde va?</a>
+        <a href="index.html#budget_distribution" class="nav-link w-nav-link">Conceptos</a>
+        <a href="https://www.transparenciapresupuestaria.gob.mx/" class="nav-link w-nav-link">Transparencia</a>
+      </nav>
+      <div class="nav-menubtn w-nav-button">
+        <div class="w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
   
   <section class="section">
     <div class="hero">
